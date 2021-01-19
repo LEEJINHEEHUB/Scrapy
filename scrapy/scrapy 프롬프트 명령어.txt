@@ -1,0 +1,74 @@
+scrapy 프롬프트 명령어
+(myselenium) C:\work>mkdir scrapy
+
+(myselenium) C:\work>cd scrapy
+
+(myselenium) C:\work\scrapy>conda deactivate
+
+(base) C:\work\scrapy>conda create --name myscrapy
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: C:\Users\jin\.conda\envs\myscrapy
+
+
+
+Proceed ([y]/n)? y
+
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+#
+# To activate this environment, use
+#
+#     $ conda activate myscrapy
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+
+(base) C:\work\scrapy>
+(base) C:\work\scrapy>conda info --envs
+# conda environments:
+#
+base                  *  C:\ProgramData\Anaconda3
+myscrapy                 C:\Users\jin\.conda\envs\myscrapy
+myselenium               C:\Users\jin\.conda\envs\myselenium
+selenium                 C:\Users\jin\.conda\envs\selenium
+
+
+(base) C:\work\scrapy>conda activate myscrapy
+
+(myscrapy) C:\work\scrapy>conda list
+# packages in environment at C:\Users\jin\.conda\envs\myscrapy:
+#
+# Name                    Version                   Build  Channel
+
+(myscrapy) C:\work\scrapy>conda install my scrapy // 스크레피 설치 
+(myscrapy) C:\work\scrapy>scrapy shell
+
+//역기서 부터는 쉘임
+>>> fetch('https://news.naver.com/main/list.nhn?mode=LSD&mid=sec&sid1=001')
+2021-01-19 13:47:40 [scrapy.core.engine] INFO: Spider opened
+2021-01-19 13:47:40 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://news.naver.com/main/list.nhn?mode=LSD&mid=sec&sid1=001> (referer: None)
+
+>>> view(response) // 사이트 화면을 보여줌 
+True
+>>>print(response)  // 개발자 도구 소스코드를 보여줌
+ctrl + z
+
+(myscrapy) C:\work\scrapy>scrapy shell
+
+>>> fetch('https://news.naver.com/main/list.nhn?mode=LS2D&sid2=258&sid1=101&mid=shm&date=20210119&page=1')  //네이버 뉴스 - 증권
+
+//네이버 뉴스 - 증권 개발자 코드에서 select element 기사 제목 copy xpath 후 ul, li 수정
+>>> response.xpath('//*[@id="main_content"]/div[2]/ul/li/dl/dt[2]/a/text()').extract()
+
+//네이버 뉴스 - 증권 개발자 코드에서 select element 신문사 부분만 가져오기. <span class="writing"> [.writhing] 앞에 ' . '점을 붙이는게 중요함
+>>> response.css('.writing::text').extract()
+
+//네이버 뉴스 - 증권 개발자 코드에서 select element 미리보기 부분만 가져오기.
+>>> response.css('.lede::text').extract()

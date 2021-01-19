@@ -1,0 +1,25 @@
+https://news.naver.com/main/list.nhn?mode=LS2D&sid2=258&sid1=101&mid=shm&date=20210119&page=1
+https://news.naver.com/main/list.nhn?mode=LS2D&sid2=258&sid1=101&mid=shm&date=20210119&page=2
+https://news.naver.com/main/list.nhn?mode=LS2D&sid2=258&sid1=101&mid=shm&date=20210119&page=3
+...
+? 는 = 0 or 1
+client (web browser) 
+    -> server (요청)
+            -주소 (리스소의 위치): https://news.naver.com/main/list.nhn
+            -전달 파라미터:  mode=LS2D&
+                            sid2=258&
+                            sid1=101&
+                            mid=shm&
+                            date=20210119&
+                            page=1
+                    (key)=(value)
+                    여러개 파라미터 전달시 구분 기호: &
+
+-----------------------------------------------------------------------------------
+이 부분이 중요함 
+//*[@id="main_content"]/div[2]/ul/li/dl/dt[2]/a/text()
+
+-----------------------------------------------------------------------------------
+
+response.xpath('//*[@id="main_content"]/div[2]/ul/li/dl/dt[2]/a/text()').extract()
+-------------------------------------------------------------------------------------
